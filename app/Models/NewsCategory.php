@@ -14,4 +14,5 @@ class NewsCategory extends Model
         'news_id',
         'category_id',
     ];
+
 }

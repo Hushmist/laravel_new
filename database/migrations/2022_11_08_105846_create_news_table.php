@@ -21,6 +21,13 @@ return new class extends Migration
             $table->bigInteger('author_id')->required();
             $table->timestamps();
         });
+
+        DB::table('news')->insert([
+            'title' => 'author 1',
+            'preview' => 'Author@gmail.com',
+            'text' => 'img/ds4f8d4s6_avatar.png',
+            'author_id' => 1
+        ]);
     }
 
     /**

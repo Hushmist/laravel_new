@@ -20,6 +20,12 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->timestamps();
         });
+
+        DB::table('authors')->insert([
+            'name' => 'author 1',
+            'email' => 'Author@gmail.com',
+            'avatar' => 'img/ds4f8d4s6_avatar.png',
+        ]);
     }
 
     /**

@@ -2,11 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Subcategory;
-use App\Models\Category;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class NewsCategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +14,9 @@ class CategoryResource extends JsonResource
      */
     public function toArray($request)
     {
-        $subcategories = Subcategory::where('category_id', $this->id)->get();
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'subcategories' => SubcategoryResource::collection($subcategories),
             'created_at' => $this->created_at,
         ];
     }

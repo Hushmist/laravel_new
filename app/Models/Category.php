@@ -11,4 +11,14 @@ class Category extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function news_category()
+    {
+        return $this->hasMany(NewsCategory::class);
+    }
+
+    public function subcategory()
+    {
+        return $this->hasMany(Subcategory::class);
+    }
 }

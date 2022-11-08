@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use Illuminate\Http\Request;
+use App\Http\Resources\AuthorResource;
+use App\Http\Requests\AuthorRequest;
+use Illuminate\Support\Facades\Validator;
 
 class AuthorController extends Controller
 {
@@ -16,7 +19,7 @@ class AuthorController extends Controller
     public function index()
     {
         $author = Author::all();
-        return response()->json($author, 200);
+        return response()->json(AuthorResource::collection($author), 200);
     }
 
     /**
@@ -27,8 +30,17 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-       $author = Author::create($request->all()); //$request->validated()
-       return response()->json($author, 201);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:authors|max:255',
+            'avatar' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        $author = Author::create($request->all()); 
+        return response()->json(new AuthorResource($author), 201);
     }
 
     /**

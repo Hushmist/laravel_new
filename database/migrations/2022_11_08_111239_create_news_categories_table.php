@@ -17,10 +17,28 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('news_id')->required();
             $table->bigInteger('category_id')->required();
-            // $table->bigInteger('subcategory_id')->required();
-            // $table->bigInteger('subcategory_parametr_id')->required();
+            $table->bigInteger('subcategory_id')->nullable();
+            $table->bigInteger('subcategory_parametr_id')->nullable();
             $table->timestamps();
         });
+
+        DB::table('news_categories')->insert([
+            'news_id' => 1,
+            'category_id' => 2,
+            'subcategory_id' => 2,
+            'subcategory_parametr_id' => 1,
+        ]);
+
+        DB::table('news_categories')->insert([
+            'news_id' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 2,
+        ]);
+
+        DB::table('news_categories')->insert([
+            'news_id' => 1,
+            'category_id' => 3,
+        ]);
     }
 
     /**
